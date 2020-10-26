@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:pothole/screen/MyRequest.dart';
 import 'package:pothole/screen/home.dart';
 import 'package:pothole/screen/navigation_bloc.dart';
 import 'package:pothole/screen/upload.dart';
@@ -123,7 +124,14 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: MediaQuery.of(context).size.height * 0.03,
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MyRequest(
+                                        currentUser: currentUser,
+                                      )));
+                        },
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.8,
                           decoration: BoxDecoration(

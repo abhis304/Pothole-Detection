@@ -38,17 +38,6 @@ class _UploadState extends State<Upload>
     });
   }
 
-  handleChooseFromGallery() async {
-    Navigator.pop(context);
-    File file = await ImagePicker.pickImage(
-      source: ImageSource.gallery,
-    );
-
-    setState(() {
-      this.file = file;
-    });
-  }
-
   selectImage(context) {
     return showDialog(
         context: context,
@@ -59,10 +48,6 @@ class _UploadState extends State<Upload>
               SimpleDialogOption(
                 child: Text('Photo with Camera'),
                 onPressed: handleTakePhoto,
-              ),
-              SimpleDialogOption(
-                child: Text('Image From Gallery'),
-                onPressed: handleChooseFromGallery,
               ),
               SimpleDialogOption(
                 child: Text('Cancel'),
