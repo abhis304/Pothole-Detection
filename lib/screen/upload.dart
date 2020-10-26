@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,6 +11,9 @@ import 'package:image/image.dart' as Img;
 import 'package:pothole/Model/user.dart';
 import 'package:pothole/screen/home.dart';
 import 'package:uuid/uuid.dart';
+
+var lat;
+var long;
 
 class Upload extends StatefulWidget {
   final User currentUser;
@@ -62,13 +66,16 @@ class _UploadState extends State<Upload>
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Colors.white,
-          leading: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
+          leading: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: Colors.black,
+              ),
             ),
           ),
           centerTitle: true,
@@ -80,7 +87,7 @@ class _UploadState extends State<Upload>
           )),
       body: Container(
         width: MediaQuery.of(context).size.width,
-        color: Colors.greenAccent,
+        color: Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -101,7 +108,7 @@ class _UploadState extends State<Upload>
                     fontSize: 22.0,
                   ),
                 ),
-                color: Colors.deepOrange,
+                color: Colors.red[300],
                 onPressed: () => selectImage(context),
               ),
             ),
@@ -153,6 +160,8 @@ class _UploadState extends State<Upload>
       'description': description,
       'location': location,
       'timestamp': _timestamp,
+      'latitude': lat,
+      'longitude': long,
     });
   }
 
@@ -199,7 +208,7 @@ class _UploadState extends State<Upload>
               child: Text(
                 'Post',
                 style: TextStyle(
-                  color: Colors.blueAccent,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,
                 ),
@@ -250,7 +259,7 @@ class _UploadState extends State<Upload>
           ListTile(
             leading: Icon(
               Icons.pin_drop,
-              color: Colors.blueAccent,
+              color: Colors.red[300],
               size: 35.0,
             ),
             title: Container(
@@ -269,7 +278,7 @@ class _UploadState extends State<Upload>
             height: 100.0,
             alignment: Alignment.center,
             child: RaisedButton.icon(
-              onPressed: getUserLocation,
+              onPressed: () => getUserLocation(widget.currentUser.id),
               icon: Icon(
                 Icons.my_location,
                 color: Colors.white,
@@ -281,7 +290,7 @@ class _UploadState extends State<Upload>
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30.0),
               ),
-              color: Colors.blue,
+              color: Colors.red[300],
             ),
           )
         ],
@@ -289,11 +298,19 @@ class _UploadState extends State<Upload>
     );
   }
 
-  getUserLocation() async {
+  getUserLocation(String userId) async {
     Position position = await Geolocator()
         .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     List<Placemark> placemarks = await Geolocator()
         .placemarkFromCoordinates(position.latitude, position.longitude);
+
+    print(position.latitude);
+    print(position.longitude);
+
+    setState(() {
+      lat = position.latitude;
+      long = position.longitude;
+    });
 
     Placemark placemark = placemarks[0];
 

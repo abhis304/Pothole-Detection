@@ -172,7 +172,7 @@ class _CarddState extends State<Cardd> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(5.0),
       child: Card(
         elevation: 10,
         child: Container(
@@ -189,6 +189,7 @@ class _CarddState extends State<Cardd> {
               ),
               Container(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(

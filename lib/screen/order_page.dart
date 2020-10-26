@@ -23,64 +23,68 @@ class _OrderPageState extends State<OrderPage> {
         ..rotateY(isDrawerOpen ? -0.5 : 0.0),
       duration: Duration(milliseconds: 250),
       child: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  isDrawerOpen
-                      ? IconButton(
-                          icon: Icon(Icons.arrow_back_ios),
-                          onPressed: () {
-                            setState(() {
-                              xOffset = 0.0;
-                              yOffset = 0.0;
-                              scaleFactor = 1;
-                              isDrawerOpen = false;
-                            });
-                          })
-                      : IconButton(
-                          icon: Icon(Icons.menu),
-                          onPressed: () {
-                            setState(() {
-                              xOffset = 180.0;
-                              yOffset = 150.0;
-                              scaleFactor = 0.6;
-                              isDrawerOpen = true;
-                            });
-                          },
-                        ),
-                  Column(
-                    children: <Widget>[
-                      Text(
-                        'Location',
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Icon(
-                            Icons.location_on,
-                            color: Colors.green[500],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    isDrawerOpen
+                        ? IconButton(
+                            icon: Icon(Icons.arrow_back_ios),
+                            onPressed: () {
+                              setState(() {
+                                xOffset = 0.0;
+                                yOffset = 0.0;
+                                scaleFactor = 1;
+                                isDrawerOpen = false;
+                              });
+                            })
+                        : IconButton(
+                            icon: Icon(Icons.menu),
+                            onPressed: () {
+                              setState(() {
+                                xOffset = 180.0;
+                                yOffset = 150.0;
+                                scaleFactor = 0.6;
+                                isDrawerOpen = true;
+                              });
+                            },
                           ),
-                          Text('INDIA'),
-                        ],
-                      ),
-                    ],
-                  ),
-                  CircleAvatar(),
-                ],
-              ),
-            ),
-            Expanded(
-              child: Center(
-                child: Text(
-                  'Order Page',
-                  style: TextStyle(fontWeight: FontWeight.w900, fontSize: 28.0),
+                    Column(
+                      children: <Widget>[
+                        Text(
+                          'Location',
+                        ),
+                        Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.location_on,
+                              color: Colors.green[500],
+                            ),
+                            Text('INDIA'),
+                          ],
+                        ),
+                      ],
+                    ),
+                    CircleAvatar(),
+                  ],
                 ),
               ),
-            ),
-          ],
+              Expanded(
+                child: Center(
+                  child: Text(
+                    'GetRequest Page',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w900, fontSize: 28.0),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

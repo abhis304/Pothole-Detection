@@ -104,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.8,
                           decoration: BoxDecoration(
-                            color: Colors.redAccent,
+                            color: Colors.red[300],
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: Padding(
@@ -135,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.8,
                           decoration: BoxDecoration(
-                            color: Colors.redAccent,
+                            color: Colors.red[300],
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                           child: Padding(

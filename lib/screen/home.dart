@@ -11,7 +11,6 @@ import 'package:pothole/Model/user.dart';
 import 'package:pothole/screen/DrawerScreen.dart';
 import 'package:pothole/screen/HomeScreen.dart';
 import 'package:pothole/screen/create_account.dart';
-import 'package:pothole/screen/intro_page.dart';
 import 'package:pothole/screen/navigation_bloc.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -113,9 +112,9 @@ class _HomeState extends State<Home> {
         'photoUrl': user.photoUrl,
         'email': user.email,
         'displayName': user.displayName,
-        'bio': '',
         'timestamp': timestamp,
       });
+      currentUser = User.fromDocument(doc);
 
       // make the current user to their own follower (to include their post in timeline)
       // current user ni potani post ne timeline par display karva mate pela tene follower's ma add karva ma avse
@@ -255,32 +254,79 @@ class _HomeState extends State<Home> {
         //     // ],
         //   ),
         // ),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Colors.black,
+              Colors.yellow,
+            ],
+          ),
+        ),
         alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Post Share',
-              style: TextStyle(
-                fontFamily: 'Signatra',
-                fontSize: 80.0,
-                color: Colors.white,
-              ),
-            ),
-            GestureDetector(
-              onTap: login,
-              child: Container(
-                width: 260.0,
-                height: 60.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/google.png'),
-                    fit: BoxFit.cover,
-                  ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'Road Quality Assessment',
+                style: TextStyle(
+                  fontFamily: 'Signatra',
+                  fontSize: 30.0,
+                  color: Colors.black,
                 ),
               ),
             ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: GestureDetector(
+            //     onTap: login,
+            //     child: Container(
+            //       width: 260.0,
+            //       height: 60.0,
+            //       decoration: BoxDecoration(
+            //         image: DecorationImage(
+            //           image: AssetImage('assets/images/google.png'),
+            //           fit: BoxFit.cover,
+            //         ),
+            //       ),
+            //     ),
+            //   ),
+            // ),
+            OutlineButton(
+              splashColor: Colors.grey,
+              onPressed: () => login(),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40)),
+              highlightElevation: 0,
+              borderSide: BorderSide(color: Colors.black54, width: 2),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Image(
+                        image: AssetImage("assets/images/logo.png"),
+                        height: 35.0),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        'Start with Google',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+
             SizedBox(
               height: 30.0,
             ),

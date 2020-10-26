@@ -15,7 +15,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.greenAccent,
+      color: Colors.red[300],
       padding: EdgeInsets.only(top: 40.0, bottom: 60.0, left: 10.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -83,10 +83,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   BlocProvider.of<NavigationBloc>(context)
                       .add(NavigationEvents.MyOrdersPageClickEvent);
                 },
-              ),
-              MenuItem(
-                icon: Icons.card_giftcard,
-                title: 'Wishlist',
               ),
             ],
           ),
