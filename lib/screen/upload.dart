@@ -168,7 +168,6 @@ class _UploadState extends State<Upload>
       'description': description,
       'location': location,
       'timestamp': _timestamp,
-      'likes': {},
     });
   }
 
@@ -317,8 +316,11 @@ class _UploadState extends State<Upload>
         '${placemark.subThoroughfare} ${placemark.thoroughfare}, ${placemark.subLocality} ${placemark.locality}, ${placemark.subAdministrativeArea}, ${placemark.administrativeArea} ${placemark.postalCode}, ${placemark.country}';
     print(completeAddress);
 
-    String formattedAddress = "${placemark.locality}, ${placemark.country}";
+    String formattedAddress =
+        "${placemark.subLocality}, ${placemark.subAdministrativeArea}";
     locationController.text = formattedAddress;
+
+    print(locationController.text);
   }
 
   @override

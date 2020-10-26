@@ -103,6 +103,8 @@ class _HomeState extends State<Home> {
       final userName = await Navigator.push(
           context, MaterialPageRoute(builder: (context) => CreateAccount()));
 
+      print(userName);
+
       // 3) get username from create account , use it to make new user document in users collection.
 
       usersRef.doc(user.id).set({
